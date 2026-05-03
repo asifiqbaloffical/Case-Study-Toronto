@@ -4,9 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Case Study — Toronto Electrician | Md. Asif Iqbal</title>
-  <meta property="og:image" content="https://asifiqbaloffical.github.io/Case-Study-Toronto/thumbnail.jpg">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -844,8 +841,145 @@
     margin: 20px 0 40px;
   }
 
+  /* ── FIXED HEADER ── */
+  .site-header {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    height: 60px;
+    background: rgba(3, 25, 34, 0.96);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(223,164,8,0.15);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    padding: 0 40px;
+    justify-content: space-between;
+    transition: background 0.3s;
+  }
+
+  .site-header.scrolled {
+    background: rgba(3, 25, 34, 0.99);
+    border-bottom-color: rgba(223,164,8,0.25);
+    box-shadow: 0 2px 20px rgba(0,0,0,0.3);
+  }
+
+  .header-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--white);
+    text-decoration: none;
+    letter-spacing: 0.3px;
+    white-space: nowrap;
+  }
+
+  .header-logo span { color: var(--gold); }
+
+  .header-nav {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .header-nav a {
+    font-size: 13px;
+    font-weight: 500;
+    color: rgba(255,255,255,0.65);
+    text-decoration: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    transition: color 0.2s, background 0.2s;
+    white-space: nowrap;
+  }
+
+  .header-nav a:hover {
+    color: var(--white);
+    background: rgba(255,255,255,0.06);
+  }
+
+  .header-nav a.active {
+    color: var(--gold);
+  }
+
+  .header-nav .nav-divider {
+    width: 1px;
+    height: 16px;
+    background: rgba(255,255,255,0.12);
+    margin: 0 4px;
+  }
+
+  .header-nav .linkedin-link {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .header-nav .linkedin-link svg {
+    width: 14px; height: 14px;
+    fill: currentColor;
+  }
+
+  .btn-hire {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--gold);
+    color: var(--dark) !important;
+    font-size: 13px !important;
+    font-weight: 700 !important;
+    padding: 8px 18px !important;
+    border-radius: 4px !important;
+    margin-left: 8px;
+    transition: background 0.2s, transform 0.2s !important;
+  }
+
+  .btn-hire:hover {
+    background: var(--gold-light) !important;
+    color: var(--dark) !important;
+    transform: translateY(-1px) !important;
+  }
+
+  /* Push body down so header doesn't overlap content */
+  body { padding-top: 60px; }
+
+  /* Mobile hamburger */
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    padding: 4px;
+    background: none;
+    border: none;
+  }
+
+  .hamburger span {
+    display: block;
+    width: 22px; height: 2px;
+    background: var(--white);
+    border-radius: 2px;
+    transition: all 0.3s;
+  }
+
   /* ── RESPONSIVE ── */
   @media (max-width: 900px) {
+    .hamburger { display: flex; }
+    .header-nav {
+      display: none;
+      position: absolute;
+      top: 60px; left: 0; right: 0;
+      background: rgba(3,25,34,0.98);
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 16px 24px 24px;
+      gap: 2px;
+      border-bottom: 1px solid rgba(223,164,8,0.15);
+    }
+    .header-nav.open { display: flex; }
+    .header-nav a { width: 100%; padding: 10px 12px; }
+    .header-nav .nav-divider { width: 100%; height: 1px; margin: 4px 0; }
+    .btn-hire { width: 100%; justify-content: center; margin-left: 0; margin-top: 8px; }
     .hero { grid-template-columns: 1fr; }
     .hero-right { padding: 60px 40px; }
     .hero-right::before { display: none; }
@@ -867,6 +1001,32 @@
 </style>
 </head>
 <body>
+
+<!-- ══════════════════ HEADER ══════════════════ -->
+<header class="site-header" id="site-header">
+  <a href="https://asifiqbaloffical.github.io/Portfolio/" class="header-logo">Md. <span>Asif Iqbal</span></a>
+
+  <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+    <span></span><span></span><span></span>
+  </button>
+
+  <nav class="header-nav" id="header-nav">
+    <a href="https://asifiqbaloffical.github.io/Portfolio/">Home</a>
+    <a href="https://asifiqbaloffical.github.io/Portfolio/#about">About Me</a>
+    <a href="https://asifiqbaloffical.github.io/Portfolio/#expertise">Expertise</a>
+    <a href="https://asifiqbaloffical.github.io/Case-Study-Toronto/" class="active">Case Study</a>
+    <a href="https://asifiqbaloffical.github.io/Portfolio/#certifications">Certifications</a>
+    <a href="https://asifiqbaloffical.github.io/Portfolio/#contact">Contact</a>
+    <div class="nav-divider"></div>
+    <a href="https://www.linkedin.com/in/asifiqbalofficial" target="_blank" class="linkedin-link">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+      LinkedIn
+    </a>
+    <a href="https://wa.me/8801614021914" target="_blank" class="btn-hire">
+      Hire Me ↗
+    </a>
+  </nav>
+</header>
 
 <!-- ══════════════════ HERO ══════════════════ -->
 <section class="hero">
@@ -1318,7 +1478,7 @@
     </div>
   </div>
 </section>
-  
+
 <!-- ══════════════════ FOOTER ══════════════════ -->
 <footer class="footer">
   <div class="container">
@@ -1336,7 +1496,17 @@
 </footer>
 
 <script>
-// Scroll fade-in
+// Header scroll effect
+const header = document.getElementById('site-header');
+window.addEventListener('scroll', () => {
+  header.classList.toggle('scrolled', window.scrollY > 20);
+});
+
+// Hamburger toggle
+document.getElementById('hamburger').addEventListener('click', () => {
+  document.getElementById('header-nav').classList.toggle('open');
+});
+
 const observer = new IntersectionObserver((entries) => {
   entries.forEach((entry, i) => {
     if (entry.isIntersecting) {
